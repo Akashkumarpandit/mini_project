@@ -1,0 +1,131 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg-gradient);
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+/* Decorative blobs */
+.blob1, .blob2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.blob1 {
+  width: 500px; height: 500px;
+  background: rgba(79, 70, 229, 0.1);
+  top: -150px; left: -150px;
+}
+.blob2 {
+  width: 450px; height: 450px;
+  background: rgba(244, 63, 94, 0.08);
+  bottom: -100px; right: -100px;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: 48px;
+  width: 100%;
+  max-width: 440px;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.logo { 
+  font-size: 2.5rem; 
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-left: 4px;
+}
+
+.message {
+  font-size: 0.875rem;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: 500;
+}
+.error   { background: #fff1f2; color: var(--accent-rose); border: 1px solid #fecdd3; }
+.success { background: #ecfdf5; color: var(--accent-emerald); border: 1px solid #d1fae5; }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--surface-border);
+}
+
+.toggle {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+.toggleBtn {
+  background: none;
+  color: var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px;
+}
+.toggleBtn:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
