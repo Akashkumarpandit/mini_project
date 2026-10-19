@@ -1,4 +1,6 @@
 package com.example.auth.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -7,17 +9,32 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @JsonIgnore
+    @Column(nullable = false)
     private String password;
+
     private String phone;
     private String role;
+    private String avatarUrl;
+    private boolean verified = false;
+
     private String googleId;
     private String multiFactorSecret;
+
     private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -25,6 +42,11 @@ public class User {
     private Set<String> roles = new HashSet<>();
 
     public User() {}
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
     // Getters and setters
     public Long getId() { return id; }
@@ -41,12 +63,18 @@ public class User {
     public void setPhone(String phone) { this.phone = phone; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+    public String getAvatarUrl() { return avatarUrl; }
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+    public boolean isVerified() { return verified; }
+    public void setVerified(boolean verified) { this.verified = verified; }
     public String getGoogleId() { return googleId; }
     public void setGoogleId(String googleId) { this.googleId = googleId; }
     public String getMultiFactorSecret() { return multiFactorSecret; }
     public void setMultiFactorSecret(String multiFactorSecret) { this.multiFactorSecret = multiFactorSecret; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
     public Set<String> getRoles() { return roles; }
     public void setRoles(Set<String> roles) { this.roles = roles; }
 
@@ -58,7 +86,10 @@ public class User {
         public UserBuilder name(String name) { user.setName(name); return this; }
         public UserBuilder email(String email) { user.setEmail(email); return this; }
         public UserBuilder password(String password) { user.setPassword(password); return this; }
+        public UserBuilder phone(String phone) { user.setPhone(phone); return this; }
         public UserBuilder role(String role) { user.setRole(role); return this; }
+        public UserBuilder avatarUrl(String avatarUrl) { user.setAvatarUrl(avatarUrl); return this; }
+        public UserBuilder verified(boolean verified) { user.setVerified(verified); return this; }
         public UserBuilder roles(Set<String> roles) { user.setRoles(roles); return this; }
         public User build() { return user; }
     }

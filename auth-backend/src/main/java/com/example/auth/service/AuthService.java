@@ -4,6 +4,7 @@ import com.example.auth.dto.AuthResponse;
 import com.example.auth.dto.LoginRequest;
 import com.example.auth.dto.MessageResponse;
 import com.example.auth.dto.SignupRequest;
+import com.example.auth.dto.UserDTO;
 import com.example.auth.entity.User;
 import com.example.auth.repository.UserRepository;
 import com.example.auth.util.JwtUtil;
@@ -52,7 +53,16 @@ public class AuthService {
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return new AuthResponse(jwt, user.getId(), user.getUsername(), user.getEmail(), roles);
+        return new AuthResponse(
+                jwt,
+                user.getId(),
+                user.getUsername(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole(),
+                user.isVerified(),
+                roles
+        );
     }
 
     public MessageResponse register(SignupRequest request) {
@@ -63,19 +73,39 @@ public class AuthService {
             return new MessageResponse("Error: Email is already in use!");
         }
 
-        Set<String> roles = (request.getRoles() == null || request.getRoles().isEmpty())
-                ? new HashSet<>(Set.of("USER"))
-                : request.getRoles();
+        String primaryRole = request.getRole() != null && !request.getRole().isBlank()
+                ? request.getRole().toUpperCase()
+                : "TENANT";
+
+        // Validate allowed roles
+        if (!List.of("TENANT", "OWNER", "AGENT", "ADMIN").contains(primaryRole)) {
+            primaryRole = "TENANT";
+        }
+
+        Set<String> roles = new HashSet<>();
+        roles.add(primaryRole);
+        if (request.getRoles() != null && !request.getRoles().isEmpty()) {
+            roles.addAll(request.getRoles());
+        }
 
         User user = User.builder()
                 .username(request.getUsername())
+                .name(request.getName() != null && !request.getName().isBlank() ? request.getName() : request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .phone(request.getPhone())
+                .role(primaryRole)
+                .verified(false)
                 .roles(roles)
-                .role("USER")
                 .build();
 
         userRepository.save(user);
-        return new MessageResponse("User registered successfully!");
+        return new MessageResponse("User registered successfully as " + primaryRole + "!");
+    }
+
+    public UserDTO getCurrentUser(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+        return new UserDTO(user);
     }
 }

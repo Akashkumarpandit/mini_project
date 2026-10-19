@@ -8,12 +8,11 @@
     "codex-project-manager.globalReferencesMigrationCompleted": true,
     "codex-project-manager.cellIdsToUuidMigrationCompleted": true,
     "java.compile.nullAnalysis.mode": "automatic",
-    "emmet.syntaxProfiles": {
-
-    },
+    "emmet.syntaxProfiles": {},
     "emmet.includeLanguages": {
-        "javascript": "javascriptreact"       
+        "javascript": "javascriptreact"
     },
     "emmet.triggerExpansionOnTab": true,
-    "CodeGPT.apiKey": "Ollama"
+    "CodeGPT.apiKey": "Ollama",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

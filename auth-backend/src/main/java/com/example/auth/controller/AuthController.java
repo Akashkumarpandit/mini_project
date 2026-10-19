@@ -4,10 +4,12 @@ import com.example.auth.dto.AuthResponse;
 import com.example.auth.dto.LoginRequest;
 import com.example.auth.dto.MessageResponse;
 import com.example.auth.dto.SignupRequest;
+import com.example.auth.dto.UserDTO;
 import com.example.auth.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,5 +27,13 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@Valid @RequestBody SignupRequest request) {
         return ResponseEntity.ok(authService.register(request));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> getCurrentUser(Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(authService.getCurrentUser(authentication.getName()));
     }
 }
