@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private Long reviewId;
 
     @Column(nullable = false)

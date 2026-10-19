@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private Long reminderId;
 
     private String title;

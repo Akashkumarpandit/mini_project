@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class Listing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private Long listingId;
 
     @Column(nullable = false)

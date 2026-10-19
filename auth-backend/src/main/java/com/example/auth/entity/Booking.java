@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private Long bookingId;
 
     @Column(nullable = false)

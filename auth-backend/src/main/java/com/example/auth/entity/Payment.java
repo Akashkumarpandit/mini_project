@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private Long paymentId;
 
     @Column(precision = 12, scale = 2, nullable = false)
