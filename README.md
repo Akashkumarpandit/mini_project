@@ -282,3 +282,46 @@ npm run build
    - The application includes an interactive development Sandbox Payment Adapter that records transaction IDs and simulates instant card verification. For real payment processing, add Stripe SDK and configure `STRIPE_API_KEY` / webhook secret.
 3. **Map Tile Provider (Mapbox / Google Maps):**
    - The marketplace provides a responsive, interactive SVG/Canvas schematic map view. If real satellite maps are preferred, provide a Mapbox or Google Maps API key in `VITE_MAPS_API_KEY`.
+
+---
+
+## 👥 Authors, Collaborators & Key Contributions
+
+### 🌟 Project Lead & Full-Stack Architect
+- **Name:** Akash Kumar Pandit
+- **Institution:** Anurag University
+- **Email / Student ID:** [23eg106b03@anurag.edu.in](mailto:23eg106b03@anurag.edu.in)
+- **GitHub:** [@Akashkumarpandit](https://github.com/Akashkumarpandit)
+
+#### 🛠️ Core Engineering Contributions:
+- **Backend Architecture & Microservices (Spring Boot 3, Java 17):**
+  - Architected end-to-end relational schema and Spring Data JPA entities (`User`, `Listing`, `Booking`, `Payment`, `Review`, `Message`, `Reminder`, `Category`, `Favorite`, `ListingReport`, `AuditLog`).
+  - Implemented stateless JWT (HMAC-256) security filter chain with role-based access control (`TENANT`, `OWNER`, `AGENT`, `ADMIN`).
+  - Engineered atomic booking engine with synchronized SQL overlap query to strictly prevent double-booking.
+  - Implemented comprehensive RESTful controllers and service layer with transaction management and validation.
+- **Frontend Architecture & UX Engineering (React 18, Vite):**
+  - Built high-performance responsive UI using CSS Modules, complete with role-specific navigation and state persistence.
+  - Designed public Property Marketplace with live metrics calculation, granular multi-criteria filtering, and 4-way comparison drawer.
+  - Developed full Property Details portal featuring interactive photo gallery, lightbox modal, enquiry messaging, and report modals.
+  - Built interactive development Sandbox Payment Adapter simulating instant card verification and receipt generation.
+  - Implemented role-aware Dashboard for Admin platform governance, Owner portfolio oversight, and Tenant booking management.
+  - Integrated backend-synchronized interactive Calendar Agenda for tracking viewings, booking windows, and reminders.
+
+### 🤝 Project Collaborators & Contributors
+
+| Contributor | Role | Focus Area / Contributions | GitHub |
+| :--- | :--- | :--- | :--- |
+| **Akash Kumar Pandit** | Lead Architect & Full-Stack Developer | Spring Boot 3 API, Security, React Frontend, Marketplace & Booking Engine | [@Akashkumarpandit](https://github.com/Akashkumarpandit) |
+| *Collaborator* | Team Member | Quality Assurance, API Integration & Documentation | *(Add Profile)* |
+| *Collaborator* | Team Member | UI/UX Evaluation, Testing & Deployment | *(Add Profile)* |
+
+> *To invite additional collaborators on GitHub:*
+> Navigate to **Settings** &rarr; **Collaborators** &rarr; **Add people** on the repository page.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for complete details.
+
+Copyright (c) 2026 Akash Kumar Pandit and Project Collaborators.
